@@ -44,3 +44,11 @@ function shift_cipher_form() {
     );
     return $form;
 }
+
+function element_validate_direction($element) {
+    $direction = strtolower($element['#value']);
+    if (($direction !== "right") && ($direction !==
+    "left")) {
+        form_set_error($direction, t('Please enter a valid direction.'));
+    }
+}

@@ -58,61 +58,19 @@ function shift_cipher_form_submit($form, &$form_state) {
     $direction = $form_state['values']['direction'];
     $phrase = $form_state['values']['phrase'];
 
-    $alphabet = range('a', 'z'); //entire alphabet in an array
-
-    $alpha_flip = array_flip($alphabet); //from 0 => a to a => 0
-
-    $lower_case_phrase = strtolower($phrase); //lower case the phrase
+    $lower_case_phrase = strtolower($phrase);
     $split_phrase = str_split($lower_case_phrase);
-    // array(0 => h, 1 => i, 2 => , 3 => t, 4 => h, 5 => e 6 => r 7 => e);
+
+    $alphabet = range('a', 'z');
+    $alpha_flip = array_flip($alphabet);
 
     $cipher = "";
 
-    // foreach($split_phrase as $letter) {
-    //     foreach($alpha_flip as $flip) {
-    //         if ($letter === $flip) {
-    //             $cipher .= $alphabet[($letter + $shift_value)%26];
-    //         }
-    //     }
-    // }
     foreach($split_phrase as $letter) {
         $cipher = $cipher . $alphabet[($alpha_flip[$letter] + $shift_value) % 26];
     }
     $_SESSION['result'] = $cipher;
     $form_state['redirect'] = 'shift_cipher_result_page';
-    //
-    // $plain_text = "hi there";
-    //     //plaintext array
-    //     $plain_text=str_split($plain_text);
-    //     $n=count($plain_text);
-    //     $encrypted_text='';
-    //     for ($i=0; $i<$n; $i++)
-    //     	//encryption
-    //     	$encrypted_text.=$alphabet[($flip[$plain_text[$i]]+5)%26];
-    //         /*
-    //         " "
-    //         +
-    //         0 => "a", 1 => "b", etc
-    //         [("a" => 0, "b" => 1, etc[0 => "h", 1 = "i", 2 => " ", etc["h" => 0"] + 5 % 26)]
-    //         */
-    //     echo $encrypted_text;
-    //
-    // 22 + 5 mod 26 = 1 (B)
-    //
-    // 27 % 26
-    // 1, 2
-    // 27 = 1 * 26 + R
-    // R = 1
-    //
-    // 28 % 26
-    // 1, 2
-    // 28 = 1 * 26 + R
-    // R = 2
-    // 28 = 2 * 26 + R
-    // R = -24
-    // preg ex?
-    // explode
-    // string split
 }
 
 function shift_cipher_result() {

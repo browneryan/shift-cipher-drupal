@@ -1,0 +1,42 @@
+description: Change letter to a different letter
+input: a
+output: b
+
+a => 0
+b => 1
+c => 2
+d => 3
+
+1 , a , right
+
+$letter_numbers = array_values($GLOBALS['letters']);
+
+hi, I'm Tom
+
+explode
+
+foreach (letter_numbers as $letter_number) {
+    $letter_number * input
+}
+
+
+input: a
+output: z
+
+
+
+
+caesar_shift(str, number, left)
+if left: number is negative
+if positive: number stays the same
+
+hi, I'm Tom
+
+explode explode strtolower
+
+$letter_numbers = array_values($GLOBALS['letters']);
+for each (letters as letter) {
+  if (letter_numbers = letter){
+    number +
+  }
+}

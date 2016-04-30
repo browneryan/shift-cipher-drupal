@@ -52,3 +52,21 @@ function element_validate_direction($element) {
         form_set_error($direction, t('Please enter a valid direction.'));
     }
 }
+
+function shift_cipher_form_submit($form, &$form_state) {
+    $shift_value = $form_state['values']['shift_value'];
+    $direction = $form_state['values']['direction'];
+    $phrase = $form_state['values']['phrase'];
+
+    $alphas = range('a', 'z');
+    $alphabet = array_flip($alphas);
+
+    $lower_case_phrase = strtolower($phrase);
+    $split_phrase = str_split($lower_case_phrase);
+
+    
+
+    // preg ex?
+    // explode
+    // string split
+}

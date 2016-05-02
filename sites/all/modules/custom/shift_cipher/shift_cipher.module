@@ -66,27 +66,16 @@ function shift_cipher_form_submit($form, &$form_state) {
 
     $cipher = "";
 
-    // if ($direction === "left") {
-    //     $flip_it = array_flip($split_phrase);
-    //     foreach($split_phrase as $letter) {
-    //         if($letter === " " || $letter === "!" || $letter === "?" || $letter === "," || $letter === "'" || $letter === "." || $letter === "\"" || $letter === "1") {
-    //             $cipher .= $letter;
-    //         } elseif ($direction === "left") {
-    //         $cipher .= $alphabet[($alpha_flip([$letter] - $shift_value) % 26)];
-    //
-    //         $cipher .= $letter;
-    //         // $yup = $alpha_flip[$igotthis];
-    //         // $yessir = $alphabet[$yup];
-    //         // $cipher .= $yup;
-    //         }
-    //     }
-    // }
-
     foreach($split_phrase as $letter) {
-        if($letter === " " || $letter === "!" || $letter === "?" || $letter === "," || $letter === "'" || $letter === "." || $letter === "\"" || $letter === "1") {
+        if($letter === " " || $letter === "!" || $letter === "?" || $letter === "," || $letter === "'" || $letter === "." || $letter === "&" || $letter === "\$" || $letter === "#" || $letter === "@" || $letter === "\"" || $letter === "1") {
             $cipher .= $letter;
+        } elseif ($direction === "left") {
+            $subtraction = $alpha_flip[$letter] - $shift_value;
+            $modulo = ($subtraction % 26) + ($subtraction < 0 ? 26 : 0);
+            $alpha_conversion = $alphabet[$modulo];
+            $cipher .= $alpha_conversion;
         } else {
-        $cipher .= $alphabet[($alpha_flip[$letter] + $shift_value) % 26];
+            $cipher .= $alphabet[($alpha_flip[$letter] + $shift_value) % 26];
         }
     }
     $_SESSION['result'] = $cipher;
@@ -97,13 +86,5 @@ function shift_cipher_result() {
     return (string) $_SESSION['result'];
 }
 
-//how to have -1 = z?
-// -1, 26
-// -1 || 0
-// -1 = -1 * 26 + R
-// R = 25
 
-// -22, 26
-// -1, 26
-// -22 = -1 * 26 + R
-// R = 4
+//can't be greater than 25

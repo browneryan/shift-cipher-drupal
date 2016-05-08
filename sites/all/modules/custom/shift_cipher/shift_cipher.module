@@ -22,7 +22,7 @@ function shift_cipher_form() {
         '#title' => "Shift value",
         '#type' => 'textfield',
         '#description' => "Enter a number to determine how far you want to shift your phrase.",
-        '#element_validate' => array('element_validate_integer_positive', 'element_validate_range'),
+        '#element_validate' => array('element_validate_integer_positive'),
         '#required' => TRUE,
     );
     $form['direction'] = array(
@@ -43,13 +43,6 @@ function shift_cipher_form() {
         '#value' => "Encrypt",
     );
     return $form;
-}
-
-function element_validate_range($element) {
-    $shift_value = $element['#value'];
-    if ($shift_value > 25) {
-        form_set_error($shift_value, t('Please enter a number between 1 and 25.'));
-    }
 }
 
 function element_validate_direction($element) {
@@ -73,12 +66,17 @@ function shift_cipher_form_submit($form, &$form_state) {
 
     $cipher = "";
 
+    $punctuation = [' ', '\'', "\"", '.', ',', '/', '<', '>', '?', ';', ':', '{', '}', "|", '-', '_', '+', '=', ')', '(', '[', ']', '*', '&', '^', '%', '$', '#', '@', '!', '~', '`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
     foreach($split_phrase as $letter) {
-        if($letter === " " || $letter === "!" || $letter === "?" || $letter === "," || $letter === "'" || $letter === "." || $letter === "&" || $letter === "\$" || $letter === "#" || $letter === "@" || $letter === "\"" || $letter === "1") {
+        if(in_array($letter, $punctuation)) {
             $cipher .= $letter;
         } elseif ($direction === "left") {
             $subtraction = $alpha_flip[$letter] - $shift_value;
             $modulo = ($subtraction % 26) + ($subtraction < 0 ? 26 : 0);
+            if($modulo === 26) {
+                $modulo = 0;
+            }
             $alpha_conversion = $alphabet[$modulo];
             $cipher .= $alpha_conversion;
         } else {

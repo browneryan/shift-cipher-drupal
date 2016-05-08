@@ -5,7 +5,7 @@
 
 ## Description
 
-This site allows users to enter a phrase and have it encrypted depending on a number chosen between 1 and 25, and a direction of either right or left.  Entering in "hi there!", with a shift value of "1" and a direction of "right" will result in "ij uifsf!".  Each letter has changed into the letter just right of its position in the alphabet ("h" is now "i" and so on).  Changing the number to two would have turned "h" into "j".
+This site allows users to enter a phrase and have it encrypted depending on the number chosen, and a direction of either right or left.  Entering in "hi there!", with a shift value of "1" and a direction of "right" will result in "ij uifsf!".  Each letter has changed into the letter just right of its position in the alphabet ("h" is now "i" and so on).  Changing the number to two would have turned "h" into "j".
 
 If the input was the number "1" with a direction of "left", the letter "h" would turn into its left neighbor in the alphabet, "g".  And so on.
 
